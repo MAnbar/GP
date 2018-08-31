@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageView myImageView = findViewById(R.id.imgview);
-        myImageView.setImageResource(R.drawable.test1);
+        myImageView.setImageResource(R.drawable.test2);
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 bitmapFactoryoptions.inMutable = true;
                 Bitmap myBitmap = BitmapFactory.decodeResource(
                         getApplicationContext().getResources(),
-                        R.drawable.test1,
+                        R.drawable.test2,
                         bitmapFactoryoptions);
 
                 //Create a Paint object for drawing overlay
