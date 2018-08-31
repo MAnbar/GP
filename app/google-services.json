@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "165237820977",
+    "firebase_url": "https://basma3-4e970.firebaseio.com",
+    "project_id": "basma3-4e970",
+    "storage_bucket": "basma3-4e970.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165237820977:android:de3b66405e565748",
+        "android_client_info": {
+          "package_name": "com.gp.gp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165237820977-i20bqdb5idp5uj4vnm6mc61pndltkrsq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRBO_Qk-_298Cio9xT_HOikK7rSyG_meQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
