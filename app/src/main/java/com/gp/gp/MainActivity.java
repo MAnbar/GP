@@ -20,9 +20,12 @@ import android.widget.ImageView;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
+import com.google.android.gms.vision.face.Landmark;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetector;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetectorOptions;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Create a Paint object for drawing overlay
                 Paint myRectPaint = new Paint();
-                myRectPaint.setStrokeWidth(5);
+                myRectPaint.setStrokeWidth(10);
                 myRectPaint.setColor(Color.RED);
                 myRectPaint.setStyle(Paint.Style.STROKE);
 
@@ -73,7 +76,12 @@ public class MainActivity extends AppCompatActivity {
 
                 //Create the Face Detector
                 FaceDetector faceDetector = new
-                        FaceDetector.Builder(getApplicationContext()).setTrackingEnabled(false)
+                        FaceDetector.Builder(getApplicationContext())
+                        .setMode(FaceDetector.ACCURATE_MODE)
+                        .setLandmarkType(FaceDetector.ALL_LANDMARKS)
+                        .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
+                        .setMinFaceSize(0.15f)
+                        .setTrackingEnabled(true)
                         .build();
 
 
@@ -90,12 +98,20 @@ public class MainActivity extends AppCompatActivity {
                 //Draw Rectangles on the Faces
                 for (int i = 0; i < faces.size(); i++) {
                     Face thisFace = faces.valueAt(i);
+                    List<Landmark> landmarks= thisFace.getLandmarks();
+                    for(Landmark mark : landmarks){
+                        if(mark.getType()==Landmark.LEFT_MOUTH || mark.getType()==Landmark.RIGHT_MOUTH||mark.getType()==Landmark.BOTTOM_MOUTH){
+                            System.out.println(mark.getType()+" "+mark.getPosition());
+                            tempCanvas.drawPoint(mark.getPosition().x,mark.getPosition().y,myRectPaint);
+                        }
+                    }
                     float x1 = thisFace.getPosition().x;
                     float y1 = thisFace.getPosition().y;
                     float x2 = x1 + thisFace.getWidth();
                     float y2 = y1 + thisFace.getHeight();
                     tempCanvas.drawRoundRect(new RectF(x1, y1, x2, y2), 2, 2, myRectPaint);
                 }
+                faceDetector.release();
                 myImageView.setImageDrawable(new BitmapDrawable(getResources(), tempBitmap));
             }
         });
